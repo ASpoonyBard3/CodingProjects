@@ -10,60 +10,38 @@ namespace FizzBuzz
     {
         static void Main(string[] args)
         {
+
             for (int i = 1; i < 71; i++)
             {
+                string result = System.String.Empty;
 
-                if (i % 15 == 0)
+                if (i % 3 == 0)
                 {
+                    result = "Fizz";
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.WriteLine("FizzBuzz");
                 }
 
-                else if ( i % 7 == 0 && i % 3 == 0 || i % 5 == 0)
+                if (i % 5 == 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("FizzBang");
-                    if (i % 7 == 0)
-                        Console.WriteLine("Bang");
+                    result = result + "Buzz";
                 }
-                
-                else if (i % 5 == 0)
+
+                if (i % 7 == 0)
                 {
+                    result = result + "Bang";
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("Buzz");
                 }
 
-                else if (i % 3 == 0)
+                if (result == System.String.Empty)
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Fizz");
-                }
-
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(i);
-                }
 
-                /*
-                else if (i % 13 == 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("Fezz");
                 }
-
-                else if (i % 11 == 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine("Bong");
-                }
-                */
-
+                else
+                    Console.WriteLine(result);
+                    
             }
             Console.ReadLine();
-
-
-
         }
     }
 }
