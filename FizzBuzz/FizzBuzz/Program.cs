@@ -10,8 +10,11 @@ namespace FizzBuzz
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("How high do you want to fizzbuzz?");
+            int Max = Convert.ToInt32(Console.ReadLine());
 
-            for (int i = 1; i < 144; i++)
+
+            for (int i = 1; i < Max; i++)
             {
                 string result = System.String.Empty;
 
@@ -44,6 +47,13 @@ namespace FizzBuzz
                     }
                     else
                         result = "Fezz";
+                }
+                if (i % 17 == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    //result = String
+                    
+                        
                 }
 
                 if (result == System.String.Empty)
