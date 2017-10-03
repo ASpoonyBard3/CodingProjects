@@ -20,13 +20,11 @@ namespace FizzBuzz
                     result = "Fizz";
                     Console.ForegroundColor = ConsoleColor.Cyan;
                 }
-
                 if (i % 5 == 0)
                 {
                     result = result + "Buzz";
                     Console.ForegroundColor = ConsoleColor.Yellow;
                 }
-
                 if (i % 7 == 0)
                 {
                     result = result + "Bang";
@@ -39,15 +37,13 @@ namespace FizzBuzz
                 }
                 if (i % 13 == 0)
                 {
-                    if (result.StartsWith("B") || result.StartsWith("b"))
+                    if (result.StartsWith("B"))
                     {
                         result = "Fezz" + result;
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
                     else
-                        Console.ForegroundColor = ConsoleColor.Red;
                         result = "Fezz";
-
                 }
 
                 if (result == System.String.Empty)
