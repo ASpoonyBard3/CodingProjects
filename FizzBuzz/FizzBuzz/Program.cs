@@ -7,7 +7,48 @@ using System.Threading.Tasks;
 namespace FizzBuzz
 {
     class Program
-    {
+    /*{
+        public static string Fizz(string result, int num)
+        {
+            if (num % 3 == 0)
+            {
+                result = "Fizz";
+                Console.ForegroundColor = ConsoleColor.Cyan;
+            }
+        } 
+        public static string Buzz(string result, int i)
+        {
+            if (i % 5 == 0)
+            {
+                result = result + "Buzz";
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            }
+        }
+        public static string Fezz(string result, int i)
+        {
+            if (i % 13 == 0)
+            {
+                if (result.StartsWith("B"))
+                {
+                    result = "Fezz" + result;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else
+                    result = "Fezz";
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            Console.WriteLine("How high do you want to fizzbuzz?");
+            int Max = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 1; i < Max; i++)
+            {
+                string result = System.String.Empty;
+                Fizz(result, i)
+
+        */
         static void Main(string[] args)
         {
             Console.WriteLine("How high do you want to fizzbuzz?");
@@ -52,14 +93,12 @@ namespace FizzBuzz
                 {
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     //result = String
-                    
                         
                 }
 
                 if (result == System.String.Empty)
                 {
                     Console.WriteLine(i);
-
                 }
                 else
                     Console.WriteLine(result);
