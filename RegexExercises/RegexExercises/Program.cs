@@ -13,22 +13,22 @@ namespace RegexExercises
         static void Main(string[] args)
         {
             String path = @"C:\SampleText.txt";
-            string readText = File.ReadAllText(path).ToLower();
+            string readText = File.ReadAllText(path);//.ToLower();
 
+            string pattern = "(tra)";
+            RegexOptions Options = RegexOptions.Compiled | RegexOptions.IgnoreCase;
 
-            int counter = 0;
+            //int counter = 0;
 
-            for (int i = 0; i < readText.Length - 2; i++)
+            Regex newRegexClass = new Regex(pattern, Options);
+            Console.WriteLine("Parsing '{0}' with options {1}:", readText, Options.ToString());
+            matches = Options.Matches(readText);
+
+            for (int i = 0; i < matches.Count; i++)
             {
-                string maybeTra = readText.Substring(i, 3);
-                bool contains = maybeTra.Contains("tra");
-                if (contains == true)
-                {
-                    counter += 1;
-                }
-
+                Console.WriteLine("{0}.{1}", i, matches[i].values);
             }
-            Console.WriteLine(counter);
+
             Console.ReadLine();
         }
 
