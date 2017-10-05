@@ -24,13 +24,27 @@ namespace SupportBank
                 TransactionList.Add(transaction);
             }
 
+            Dictionary <String,Person> PersonalTransactions = new Dictionary<String, Person>();
+
             foreach (var transaction in TransactionList)
             {
-                
-                
-                //Console.WriteLine(transaction.From);
-            }
+                Person FromPerson = new Person(transaction.From,-transaction.Amount);
+                Person ToPerson = new Person(transaction.To, transaction.Amount);
 
+                if (PersonalTransactions.ContainsKey(FromPerson.Name))
+                {
+                    PersonalTransactions[FromPerson.Name].Balance = transaction.Amount;
+                }
+                else
+                {
+                    PersonalTransactions.Add(FromPerson.Name, FromPerson);
+                    PersonalTransactions[FromPerson.Name].Balance = transaction.Amount;
+                }
+
+
+                Console.WriteLine(transaction.From);
+                Console.WriteLine(transaction.Amount);
+            }
             Console.ReadLine();
         }
     }
@@ -56,10 +70,10 @@ namespace SupportBank
     {
         public string Name;
         public float Balance;
-        public Person(string name, string balance)
+        public Person(string name, float balance)
         {
             Name = name;
-            Balance = float.Parse(balance);
+            Balance = balance;
         }
     }
 }
