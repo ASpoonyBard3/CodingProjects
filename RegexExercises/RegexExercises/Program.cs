@@ -12,21 +12,23 @@ namespace RegexExercises
     {
         static void Main(string[] args)
         {
-            String path = @"C:\SampleText.txt";
+            String path = @"C:\Users\SJFow\Documents\CodingProjects\SampleText.txt";
             string readText = File.ReadAllText(path);//.ToLower();
 
-            string pattern = "(tra)";
+            var pattern = "(tra)";
             RegexOptions Options = RegexOptions.Compiled | RegexOptions.IgnoreCase;
 
-            //int counter = 0;
 
             Regex newRegexClass = new Regex(pattern, Options);
-            Console.WriteLine("Parsing '{0}' with options {1}:", readText, Options.ToString());
-            matches = Options.Matches(readText);
+            var matches = newRegexClass.Matches(readText);
+            foreach (Match match in matches)
+            {
 
+            }
             for (int i = 0; i < matches.Count; i++)
             {
-                Console.WriteLine("{0}.{1}", i, matches[i].values);
+                Match match = matches[i];
+                Console.WriteLine("{0}.{1}", i, matches[i].Value);
             }
 
             Console.ReadLine();
