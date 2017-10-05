@@ -33,18 +33,29 @@ namespace SupportBank
 
                 if (PersonalTransactions.ContainsKey(FromPerson.Name))
                 {
-                    PersonalTransactions[FromPerson.Name].Balance = transaction.Amount;
+                    PersonalTransactions[FromPerson.Name].Balance -= transaction.Amount;
                 }
                 else
                 {
                     PersonalTransactions.Add(FromPerson.Name, FromPerson);
-                    PersonalTransactions[FromPerson.Name].Balance = transaction.Amount;
                 }
 
-
-                Console.WriteLine(transaction.From);
-                Console.WriteLine(transaction.Amount);
+                if (PersonalTransactions.ContainsKey(ToPerson.Name))
+                {
+                    PersonalTransactions[ToPerson.Name].Balance += transaction.Amount;
+                }
+                else
+                {
+                    PersonalTransactions.Add(ToPerson.Name, ToPerson);
+                }
             }
+
+            foreach (var person in PersonalTransactions)
+            {
+                Console.WriteLine("{0} account balance is {1}.", person.Key, person.Value.Balance);
+            }
+
+
             Console.ReadLine();
         }
     }
