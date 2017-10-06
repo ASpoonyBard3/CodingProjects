@@ -29,7 +29,6 @@ namespace SupportBank
             //ADD LOGGING TO SEE IF THE FILE LOADED INTO THE LIST.
             logger.Log(LogLevel.Info, "Files loaded successfully.");
 
-
             //return list of every transaction, with the date and narrative for the account with that name.
             foreach (var line in contents)
             {
@@ -41,20 +40,26 @@ namespace SupportBank
             //for spliting into individual elements
             List<Transaction> TransactionList = new List<Transaction>();
 
-            //why does this for loop exist? counts through the content of the content list, 
+            //counts through the content of the content list, 
             //using the range to stop before it reaches the end of the string list and breaks the code
             //the string is then split across the elements of the transaction class, entering the elements 
             //into a list
             foreach (var line in contents.GetRange(1, contents.Count - 1))
             {
                 string[] splitLine = line.Split(',');
-                Transaction transaction = new Transaction(splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4]);
-                TransactionList.Add(transaction);
-            }
+                try
+                {
+                    Transaction transaction = new Transaction(splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4]);
+                }
+                catch(Exception e) {
+                    logger.Log(LogLevel.Fatal, "The date here {0},{1},{2},{3},{4},", splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4]);
+                    logger.Log(LogLevel.Fatal, "The error message was {0}",e.Message); 
+                };
+              }
 
-            /*this dictionary is populated by the below for each loop
-            with call to the person class which takes the person as string type and the balance amount as a float 
-            */
+            //this dictionary is populated by the below for each loop
+            //with call to the person class which takes the person as string type and the balance amount as a float 
+
             Dictionary<String, Person> PersonalTransactions = new Dictionary<String, Person>();
 
             foreach (var transaction in TransactionList)
@@ -121,6 +126,7 @@ namespace SupportBank
         }
 
     } //class for parsing the name and balance of person objects so that the dictionary can be populated.
+                
     public class Person
     {
         public string Name;
