@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{14B2F397-5C29-4F61-B220-5849A5D24300}</ProjectGuid>
+    <ProjectGuid>{0D64B008-27B2-4858-AEBC-B51F70B4D3F3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SupportBank</RootNamespace>
-    <AssemblyName>SupportBank</AssemblyName>
+    <RootNamespace>LoggingPractice</RootNamespace>
+    <AssemblyName>LoggingPractice</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,13 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

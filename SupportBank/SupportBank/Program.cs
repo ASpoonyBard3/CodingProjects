@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 namespace SupportBank
 {
@@ -12,17 +14,23 @@ namespace SupportBank
     {
         static void Main(string[] args)
         {
+            var config = new LoggingConfiguration();
+            var target = new FileTarget { FileName = @"C:\Users\SJFow\Documents\Logs\SupportBank.log", Layout = @"${longdate} ${level} - ${logger}: ${message}" };
+            config.AddTarget("File Logger", target);
+            config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
+            LogManager.Configuration = config;
+
+
             //takes in the files for parsing and converts the contents of the file into a string list
-            var filePath = @"C:\Users\SJFow\Desktop\transactions2014.csv";
+            var filePath = @"C: \Users\SJFow\Desktop\DodgyTransaction2015.csv";
+
             List<string> contents = File.ReadAllLines(filePath).ToList();
 
             //return list of every transaction, with the date and narrative for the account with that name.
             foreach (var line in contents)
             {
                 Console.WriteLine(line);
-
             }
-
             Console.ReadLine();
 
             //creates a new list object, for entering the list of transactions in the foreach loop 
@@ -93,6 +101,7 @@ namespace SupportBank
     // class for parsing the individual elements of the spreadsheet into the correct data types so that they can be split into a list format. 
     public class Transaction
     {
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         public DateTime Date;
         public string From;
         public string To;
@@ -118,3 +127,4 @@ namespace SupportBank
             Balance = balance;
         }
     }
+     
