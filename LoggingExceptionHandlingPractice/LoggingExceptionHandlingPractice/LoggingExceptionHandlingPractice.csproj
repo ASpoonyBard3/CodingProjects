@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0D64B008-27B2-4858-AEBC-B51F70B4D3F3}</ProjectGuid>
+    <ProjectGuid>{FCDAEECC-22E1-40A8-9530-385E02CEA63F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LoggingPractice</RootNamespace>
-    <AssemblyName>LoggingPractice</AssemblyName>
+    <RootNamespace>LoggingExceptionHandlingPractice</RootNamespace>
+    <AssemblyName>LoggingExceptionHandlingPractice</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

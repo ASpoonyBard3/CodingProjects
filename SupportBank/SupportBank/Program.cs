@@ -12,6 +12,8 @@ namespace SupportBank
 {
     class Program
     {
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+
         static void Main(string[] args)
         {
             var config = new LoggingConfiguration();
@@ -23,8 +25,10 @@ namespace SupportBank
 
             //takes in the files for parsing and converts the contents of the file into a string list
             var filePath = @"C: \Users\SJFow\Desktop\DodgyTransaction2015.csv";
-
             List<string> contents = File.ReadAllLines(filePath).ToList();
+            //ADD LOGGING TO SEE IF THE FILE LOADED INTO THE LIST.
+            logger.Log(LogLevel.Info, "Files loaded successfully.");
+
 
             //return list of every transaction, with the date and narrative for the account with that name.
             foreach (var line in contents)
@@ -126,5 +130,6 @@ namespace SupportBank
             Name = name;
             Balance = balance;
         }
+
     }
-     
+    

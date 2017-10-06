@@ -9,28 +9,36 @@ namespace LoggingPractice
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-              MyLoggingClass NewLogger = new MyLoggingClass Class();
-              
-        }
-    }
-    public class MyLoggingClass
-    {
+        /*
+         * NLog tutorial suggests to use a static Logger, so here it is
+         */
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public void MyMethod1()
+        static void Main(string[] args)
         {
-            logger.Trace("Sample trace message.");
-            logger.Debug("Sample debug message");
-            logger.Info("Sample information message.");
-            logger.Warn("Sample warning message");
-            logger.Error("Sample error messaage");
-            logger.Fatal("Sample fatal error message");
+            /*
+             * Welcome to this NLog demo
+             */
+            Console.Out.WriteLine("Greetings, some loggings is about to take place.");
+            Console.Out.WriteLine("");
 
-            //alternatively you can call the Log() method
-            //and pass the log level as the parameter.
-            logger.Log(LogLevel.Info, "Sample information message");
+
+            Console.Out.WriteLine("Let's assume you're going to work, and using the bus to get there:");
+            Console.Out.WriteLine("------------------------------------------------------------------");
+            logger.Trace("Trace: The chatter of people on the street");
+            logger.Debug("Debug: Where are you going and why?");
+            logger.Info("Info: What bus station you're at.");
+            logger.Warn("Warn: You're playing on the phone and not looking up for your bus");
+            logger.Error("Error: You get on the wrong bus.");
+            logger.Fatal("Fatal: You are run over by the bus.");
+
+            /*
+             * Closing app
+             */
+            Console.Out.WriteLine("");
+            Console.Out.WriteLine("Done logging.");
+            Console.Out.WriteLine("Hit any key to exit");
+            Console.ReadKey();
         }
     }
 }
