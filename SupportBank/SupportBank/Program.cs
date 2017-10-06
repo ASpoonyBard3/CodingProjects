@@ -70,12 +70,11 @@ namespace SupportBank
             {
                 Console.WriteLine("{0} account balance is {1}.", person.Key, person.Value.Balance);
             }
-
-
             Console.ReadLine();
         }
     }
 
+    // class for parsing the individual elements of the spreadsheet into the correct data types so that they can be split into a list format. 
     public class Transaction
     {
         public DateTime Date;
@@ -90,9 +89,9 @@ namespace SupportBank
             To = to;
             Narrative = narrative;
             Amount = float.Parse(amount);
-        } 
+        }
 
-    }
+    } //class for parsing the name and balance of person objects so that the dictionary can be populated.
     public class Person
     {
         public string Name;
