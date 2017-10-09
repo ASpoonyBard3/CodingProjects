@@ -9,6 +9,7 @@ using NLog;
 using NLog.Config;
 using NLog.Targets;
 using Newtonsoft.Json;
+using System.Xml;
 
 namespace SupportBank
 {
@@ -54,8 +55,8 @@ namespace SupportBank
                 if (FileExt == ".json")
                     TransactionList = ParseJson(ImportFile);
 
-               // if (FileExt == ".xml")
-                 //   TransactionList = XmlParser(ImportFile);
+                if (FileExt == ".xml")
+                    TransactionList = ParseXML(ImportFile);
 
                 //this dictionary is populated by the below for each loop
                 Dictionary<String, Person> PersonalTransactions = new Dictionary<String, Person>();
@@ -144,11 +145,41 @@ namespace SupportBank
                             logger.Log(LogLevel.Fatal, "The date here {0},{1},{2},{3},{4},", splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4]);
                             logger.Log(LogLevel.Fatal, "The error message was {0}", e.Message);
                         };
-
                     }
                 }
 
                 return fileContents;
+            }
+            private static List<String> ParseXML(string ImportFile, List<Transaction> TransactionList)
+            {
+
+                XmlDocument xmlFile = new XmlDocument();
+                xmlFile.Load(ImportFile);
+
+                XmlElement DocRoot = xmlFile.DocumentElement;
+                XmlNodeList nodes = DocRoot.SelectNodes("/TransactionList/SupportTransaction");
+
+                foreach(XmlNodeList node in nodes)
+                {
+                    foreach (XmlNodeList childNode in nodes.ChildNodes)
+                    {
+                        string SupportTransaction = node["SupportTransaction"].InnerText;
+                        string Description = node["Description"].InnerText;
+                        decimal Value = node["Value"].InnerText;
+                        string partiesFrom = node["partiesFrom"].InnerText;
+                        string partiesTo = node["PartiesTo"].InnerText;
+                    }
+
+                }
+
+                //create an XMLReader
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlFile)))
+                {
+                    reader.ReadToFollowing("TransactionList");
+                    reader.MoveToFirstAttribute();
+
+                    
+                }
             }
         }
     }
