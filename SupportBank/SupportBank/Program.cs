@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.Xml;
+using System.Runtime.Serialization;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -49,17 +49,15 @@ namespace SupportBank
                 List<Transaction> TransactionList = new List<Transaction>();
 
                 if (FileExt == ".csv")
-                    fileContents = CSVParser(ImportFile, TransactionList);
+                    fileContents = ParseCSV(ImportFile, TransactionList);
 
                 if (FileExt == ".json")
-                    TransactionList = JSONParser(ImportFile);
+                    TransactionList = ParseJson(ImportFile);
 
-                if (FileExt == ".xml")
-                    TransactionList = XmlParser(ImportFile);
+               // if (FileExt == ".xml")
+                 //   TransactionList = XmlParser(ImportFile);
 
                 //this dictionary is populated by the below for each loop
-                //with call to the person class which takes the person as string type and the balance amount as a float 
-
                 Dictionary<String, Person> PersonalTransactions = new Dictionary<String, Person>();
 
                 foreach (var transaction in TransactionList)
@@ -105,7 +103,7 @@ namespace SupportBank
                 Console.ReadLine();
             }
 
-            private static List<Transaction> JSONParser(string ImportFile)
+            private static List<Transaction> ParseJson(string ImportFile)
             {
                 List<Transaction> TransactionList;
 
@@ -121,11 +119,11 @@ namespace SupportBank
                 catch (Exception e)
                 {
                     logger.Log(LogLevel.Fatal, "The error message was {0}", e.Message);
-
+                    return new List<Transaction>();
                 }
             }
 
-            private static List<string> CSVParser(string ImportFile, List<Transaction> TransactionList)
+            private static List<string> ParseCSV(string ImportFile, List<Transaction> TransactionList)
             {
                 List<string> fileContents;
                 {
