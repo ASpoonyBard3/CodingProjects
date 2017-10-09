@@ -7,6 +7,7 @@ using System.IO;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
+using Newtonsoft.Json;
 
 namespace SupportBank
 {
@@ -17,16 +18,21 @@ namespace SupportBank
         static void Main(string[] args)
         {
             var config = new LoggingConfiguration();
-            var target = new FileTarget { FileName = @"C:\Users\SJFow\Documents\Logs\SupportBank.log", Layout = @"${longdate} ${level} - ${logger}: ${message}" };
+            var target = new FileTarget { FileName = @"C:\Users\SJFow\Documents\Logs\$(get-date yyyy.M.dd.hh.mm.ss)SupportBank.log", Layout = @"${longdate} ${level} - ${logger}: ${message}" };
             config.AddTarget("File Logger", target);
             config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
             LogManager.Configuration = config;
 
 
-            //takes in the files for parsing and converts the contents of the file into a string list
+            //load and then convert json file to a .net readable object
+            var JSONdata = File.ReadAllText(@"C:\Users\SJFow\Documents\CodingProjects\Transactions2013 - Copy.json");
+            var JSONDotNet = JsonConvert.DeserializeObject<List<Transaction>>(JSONdata);
+            logger.Log(LogLevel.Info, "Files loaded successfully.");
+
+
+            //takes in a csv file for parsing and converts the contents of the file into a string list
             var filePath = @"C: \Users\SJFow\Desktop\DodgyTransaction2015.csv";
             List<string> contents = File.ReadAllLines(filePath).ToList();
-            //ADD LOGGING TO SEE IF THE FILE LOADED INTO THE LIST.
             logger.Log(LogLevel.Info, "Files loaded successfully.");
 
             //return list of every transaction, with the date and narrative for the account with that name.
@@ -47,6 +53,7 @@ namespace SupportBank
             foreach (var line in contents.GetRange(1, contents.Count - 1))
             {
                 string[] splitLine = line.Split(',');
+                //
                 try
                 {
                     Transaction transaction = new Transaction(splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4]);
@@ -136,6 +143,9 @@ namespace SupportBank
             Name = name;
             Balance = balance;
         }
+    public class JSONInput
+    {
 
     }
+}
     
